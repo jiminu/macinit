@@ -97,7 +97,7 @@ fi
 
 # 6. Apply macOS Developer System Defaults
 echo ""
-read -r -p "Apply macOS developer defaults (Trackpad, Dock, Finder, Keyboard, Dark Mode)? [Y/n] " apply_defaults
+read -r -p "Apply macOS developer defaults (Trackpad, Dock, Finder, Keyboard, Battery %, Dark Mode)? [Y/n] " apply_defaults
 apply_defaults="${apply_defaults:-Y}"
 if [[ "$apply_defaults" =~ ^[Yy]$ ]]; then
     info "Configuring macOS defaults..."
@@ -131,8 +131,11 @@ if [[ "$apply_defaults" =~ ^[Yy]$ ]]; then
     # Finder: Default view style to column view (clmv)
     defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
+    # Battery: Show percentage in menu bar
+    defaults -currentHost write com.apple.controlcenter BatteryShowPercentage -bool true
+
     # Restart affected services
-    killall Finder Dock 2>/dev/null || true
+    killall Finder Dock ControlCenter 2>/dev/null || true
     success "macOS defaults applied."
 fi
 

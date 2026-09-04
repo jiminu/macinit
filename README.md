@@ -28,6 +28,7 @@ cd ~/.macinit
 3. **App & Tool Installation**: Installs all GUI apps and tools declared in **`Brewfile`** via `brew bundle`.
 4. **macOS Developer Defaults**:
    - **Dark Mode**: Automatically activates Dark Mode.
+   - **Battery**: Always show battery percentage (%) in menu bar.
    - **Keyboard**: Fast key repeat rate (`KeyRepeat = 2`, `InitialKeyRepeat = 15`).
    - **Trackpad**:
      - Tap to click enabled.
