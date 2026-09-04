@@ -97,25 +97,42 @@ fi
 
 # 6. Apply macOS Developer System Defaults
 echo ""
-read -r -p "Apply macOS developer defaults (fast key repeat, tap to click, show extensions)? [Y/n] " apply_defaults
+read -r -p "Apply macOS developer defaults (Trackpad, Dock, Finder, Keyboard, Dark Mode)? [Y/n] " apply_defaults
 apply_defaults="${apply_defaults:-Y}"
 if [[ "$apply_defaults" =~ ^[Yy]$ ]]; then
     info "Configuring macOS defaults..."
 
-    # Fast key repeat rate
+    # Dark Mode
+    defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
+    # Keyboard: Fast key repeat rate
     defaults write NSGlobalDomain KeyRepeat -int 2
     defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
-    # Trackpad: tap to click
+    # Trackpad: Tap to click
     defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
     defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
     defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-    # Finder: show all filename extensions
+    # Trackpad: Three finger drag
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+
+    # Dock: Automatically hide and do not show recent applications
+    defaults write com.apple.dock autohide -bool true
+    defaults write com.apple.dock "show-recents" -bool false
+
+    # Finder: Show all filename extensions
     defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-    # Restart Finder to apply changes
-    killall Finder 2>/dev/null || true
+    # Finder: Default search scope to current folder
+    defaults write com.apple.finder FXDefaultSearchScope -string "SCev"
+
+    # Finder: Default view style to column view (clmv)
+    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+    # Restart affected services
+    killall Finder Dock 2>/dev/null || true
     success "macOS defaults applied."
 fi
 
