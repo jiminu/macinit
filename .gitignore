@@ -1,0 +1,22 @@
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Temporary & backup files
+*.tmp
+*.bak
+*~
+Brewfile.lock.json
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local environment / overrides
+.env
+.env.local
+*.local
