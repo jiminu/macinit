@@ -1,7 +1,3 @@
-brew "tree"
-# Internet file retriever
-brew "wget"
-
 # Web browser
 cask "google-chrome"
 # Open-source code editor
@@ -14,6 +10,8 @@ cask "hop"
 cask "iina"
 # Menu bar calendar
 cask "itsycal"
+# Clipboard manager
+cask "maccy"
 # Move and resize windows using keyboard shortcuts or snap actions
 cask "rectangle"
 # Tool to reverse the direction of scrolling
